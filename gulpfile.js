@@ -58,35 +58,51 @@ gulp.task('inject', ['wiredep', 'styles'], function() {
 	.pipe(gulp.dest(config.client));
 });
 
+// gulp.task('serve-dev', ['inject'], function() {
+// 	var isDev = true;
+//
+// 	var nodeOptions = {
+// 		script: config.nodeServer,
+// 		delayTime: 1,
+// 		env: {
+// 			'PORT': port,
+// 			'NODE_ENV': isDev ? 'dev' : 'build'
+// 		},
+// 		watch: [config.server]
+// 	};
+//
+// 	return $.nodemon(nodeOptions)
+// 	.on('restart', function(ev) {
+// 		log('*** nodemon restarted');
+// 		log('files changed on restart:\n' + ev);
+// 	})
+// 	.on('start', function() {
+// 		log('*** nodemon started');
+// 	})
+// 	.on('crash', function() {
+// 		log('*** nodemon crashed: script crashed for some reason');
+// 	})
+// 	.on('exit', function() {
+// 		log('*** nodemon exited cleanly');
+// 	});
+// });
+
 gulp.task('serve-dev', ['inject'], function() {
+
 	var isDev = true;
 
 	var nodeOptions = {
-		script: config.nodeServer,
+		script: config.nodeServer, //TODO
 		delayTime: 1,
 		env: {
-			'PORT': port,
+			'Port': port,
 			'NODE_ENV': isDev ? 'dev' : 'build'
 		},
-		watch: [config.server]
+		watch: [config.server] //TODO
 	};
 
-	return $.nodemon(nodeOptions)
-	.on('restart', function(ev) {
-		log('*** nodemon restarted');
-		log('files changed on restart:\n' + ev);
-	})
-	.on('start', function() {
-		log('*** nodemon started');
-	})
-	.on('crash', function() {
-		log('*** nodemon crashed: script crashed for some reason');
-	})
-	.on('exit', function() {
-		log('*** nodemon exited cleanly');
-	});
+	return $.nodemon(nodeOptions);
 });
-
 ////////////
 
 function clean(path, done) {
